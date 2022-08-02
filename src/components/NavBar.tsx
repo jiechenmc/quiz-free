@@ -11,7 +11,7 @@ export interface SideBarProps {
 const NavBar: Component<SideBarProps> = ({ name, profile }) => {
   return (
     <div class="sticky">
-      <div class="bg-accent py-4 grid grid-cols-10">
+      <div class="bg-accent py-4 px-4 grid grid-cols-10 items-center">
         {/* Logo */}
         <div class="col-span-1">
           <Logo />
@@ -23,13 +23,14 @@ const NavBar: Component<SideBarProps> = ({ name, profile }) => {
           <MenuItems />
         </div>
 
-        {/* Profile Picture */}
-        <div class="col-span-1">
-          <ProfilePicture name={name} profile={profile} />
-        </div>
         {/* Settings */}
         <div class="col-span-1">
           <SettingsButton />
+        </div>
+
+        {/* Profile Picture */}
+        <div class="col-span-1">
+          <ProfilePicture name={name} profile={profile} />
         </div>
       </div>
     </div>
