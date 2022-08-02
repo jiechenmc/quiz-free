@@ -15,8 +15,6 @@ const App: Component = () => {
   const auth = getAuth();
   const state = useAuth(auth);
 
-  console.log(state);
-
   return (
     <Switch>
       <Match when={state.loading}>
@@ -26,7 +24,7 @@ const App: Component = () => {
         <Login />
       </Match>
       <Match when={state.data}>
-        <AppScreen />
+        <AppScreen data={state.data} />
       </Match>
     </Switch>
   );

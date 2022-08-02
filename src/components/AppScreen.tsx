@@ -1,16 +1,50 @@
 import { Component } from "solid-js";
-import Sidebar from "./Sidebar";
+import NavBar from "./NavBar";
 import Content from "./Content";
 
-const AppScreen: Component = () => {
+export interface UserData {
+  readonly data: {
+    readonly emailVerified: boolean;
+    readonly isAnonymous: boolean;
+    readonly metadata: {
+      readonly creationTime?: string;
+      readonly lastSignInTime?: string;
+    };
+    readonly providerData: readonly {
+      readonly displayName: string;
+      readonly email: string;
+      readonly phoneNumber: string;
+      readonly photoURL: string;
+      readonly providerId: string;
+      readonly uid: string;
+    }[];
+    readonly refreshToken: string;
+    readonly tenantId: string;
+    readonly delete: () => Promise<void>;
+    readonly getIdToken: (forceRefresh?: boolean) => Promise<string>;
+    readonly getIdTokenResult: (
+      forceRefresh?: boolean
+    ) => Promise<import("firebase/auth").IdTokenResult>;
+    readonly reload: () => Promise<void>;
+    readonly toJSON: () => object;
+    readonly displayName: string;
+    readonly email: string;
+    readonly phoneNumber: string;
+    readonly photoURL: string;
+    readonly providerId: string;
+    readonly uid: string;
+  };
+}
+
+const AppScreen: Component<UserData> = (data) => {
+  const USER_DATA = data.data;
+
+  console.log(USER_DATA);
+
   return (
-    <div class="grid grid-cols-10">
-      <div class="col-span-2">
-        <Sidebar />
-      </div>
-      <div class="col-span-8">
-        <Content />
-      </div>
+    <div class="flex flex-col">
+      <NavBar name={USER_DATA.displayName} profile={USER_DATA.photoURL} />
+      <Content />
     </div>
   );
 };
