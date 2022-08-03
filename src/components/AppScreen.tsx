@@ -39,12 +39,10 @@ export interface UserData {
 const AppScreen: Component<UserData> = (data) => {
   const USER_DATA = data.data;
 
-  console.log(USER_DATA);
-
   return (
     <div class="flex flex-col">
       <NavBar name={USER_DATA.displayName} profile={USER_DATA.photoURL} />
-      <Content />
+      <Content uid={USER_DATA.uid} />
     </div>
   );
 };

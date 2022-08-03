@@ -1,6 +1,16 @@
-import type { Component } from "solid-js";
+import { query } from "firebase/database";
+import { Component, createSignal } from "solid-js";
 
 const MenuItems: Component = () => {
+  const [query, setQuery] = createSignal("");
+
+  const handleKeyPress = (kb: KeyboardEvent) => {
+    if (kb.key === "Enter") {
+      const input = kb.target as HTMLInputElement;
+      setQuery(input.value);
+    }
+  };
+
   return (
     <div>
       <ul class="menu-horizontal bg-inherit gap-1">
@@ -16,9 +26,11 @@ const MenuItems: Component = () => {
         </li>
         <li>
           <input
+            id="search"
             type="text"
             placeholder="Search ..."
             class="input input-bordered input-accent-content w-full max-w-xs"
+            onKeyDown={handleKeyPress}
           />
         </li>
       </ul>
