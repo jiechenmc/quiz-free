@@ -3,6 +3,7 @@ import { render } from "solid-js/web";
 import { FirebaseProvider } from "solid-firebase";
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
+import { Router } from "@solidjs/router";
 
 import "./index.css";
 import App from "./App";
@@ -24,9 +25,11 @@ const app = initializeApp(firebaseConfig);
 
 render(
   () => (
-    <FirebaseProvider config={firebaseConfig}>
-      <App />
-    </FirebaseProvider>
+    <Router>
+      <FirebaseProvider config={firebaseConfig}>
+        <App />
+      </FirebaseProvider>
+    </Router>
   ),
   document.getElementById("root") as HTMLElement
 );

@@ -14,9 +14,12 @@ const MenuItems: Component = () => {
     <div>
       <ul class="menu-horizontal bg-inherit gap-1">
         <li>
-          <button class="btn bg-inherit border-0 hover:bg-accent-content hover:bg-opacity-[0.1]">
+          <a
+            href="/"
+            class="btn bg-inherit border-0 hover:bg-accent-content hover:bg-opacity-[0.1]"
+          >
             Home
-          </button>
+          </a>
         </li>
         <li>
           <button class="btn bg-inherit border-0 hover:bg-accent-content hover:bg-opacity-[0.1]">

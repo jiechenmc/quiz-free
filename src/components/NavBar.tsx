@@ -10,7 +10,7 @@ export interface SideBarProps {
 
 const NavBar: Component<SideBarProps> = ({ name, profile }) => {
   return (
-    <div class="sticky">
+    <div class="sticky top-0">
       <div class="bg-accent py-4 px-4 grid grid-cols-10 items-center">
         {/* Logo */}
         <div class="col-span-1">

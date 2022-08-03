@@ -1,4 +1,4 @@
-import { Component, Match, Switch } from "solid-js";
+import { Component, For, Match, Switch } from "solid-js";
 import { collection, getFirestore, doc, setDoc } from "firebase/firestore";
 import { useFirestore } from "solid-firebase";
 import Deck from "./Deck";
@@ -9,8 +9,6 @@ export interface ContentProps {
 
 const Content: Component<ContentProps> = ({ uid }) => {
   const db = getFirestore();
-
-  // const flashcards = useFirestore(collection(db, `/${uid}/flashcards/CSE214`));
   const decks = useFirestore(collection(db, `/${uid}/flashcards/_decks`));
 
   const handleOnClick = () => {
@@ -40,9 +38,11 @@ const Content: Component<ContentProps> = ({ uid }) => {
           <p>An error occurred.</p>
         </Match>
         <Match when={decks.data}>
-          {decks.data?.map((d) => {
-            return <Deck deckName={d.id} />;
-          })}
+          <div class="grid grid-cols-5 gap-2 my-4">
+            {decks.data?.map((d) => {
+              return <Deck uid={uid} deckName={d.id} />;
+            })}
+          </div>
         </Match>
       </Switch>
     </div>
