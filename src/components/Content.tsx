@@ -1,13 +1,7 @@
 import { Component, Match, Switch } from "solid-js";
-import Deck from "./Deck";
-import {
-  collection,
-  getFirestore,
-  doc,
-  setDoc,
-  DocumentData,
-} from "firebase/firestore";
+import { collection, getFirestore, doc, setDoc } from "firebase/firestore";
 import { useFirestore } from "solid-firebase";
+import Deck from "./Deck";
 
 export interface ContentProps {
   uid: string;
@@ -16,7 +10,7 @@ export interface ContentProps {
 const Content: Component<ContentProps> = ({ uid }) => {
   const db = getFirestore();
 
-  const flashcards = useFirestore(collection(db, `/${uid}/flashcards/CSE214`));
+  // const flashcards = useFirestore(collection(db, `/${uid}/flashcards/CSE214`));
   const decks = useFirestore(collection(db, `/${uid}/flashcards/_decks`));
 
   const handleOnClick = () => {

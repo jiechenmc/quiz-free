@@ -7,7 +7,7 @@ interface DeckProps {
 const Deck: Component<DeckProps> = ({ deckName }) => {
   return (
     <div>
-      <h2>{deckName}</h2>
+      <a href={`/${deckName}`}>{deckName}</a>
     </div>
   );
 };
