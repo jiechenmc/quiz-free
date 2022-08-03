@@ -1,4 +1,3 @@
-import { query } from "firebase/database";
 import { Component, createSignal } from "solid-js";
 
 const MenuItems: Component = () => {

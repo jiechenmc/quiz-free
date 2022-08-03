@@ -1,6 +1,12 @@
-import type { Component } from "solid-js";
-import { Match, Switch } from "solid-js";
-import { collection, getFirestore, doc, setDoc } from "firebase/firestore";
+import { Component, Match, Switch } from "solid-js";
+import Deck from "./Deck";
+import {
+  collection,
+  getFirestore,
+  doc,
+  setDoc,
+  DocumentData,
+} from "firebase/firestore";
 import { useFirestore } from "solid-firebase";
 
 export interface ContentProps {
@@ -10,14 +16,13 @@ export interface ContentProps {
 const Content: Component<ContentProps> = ({ uid }) => {
   const db = getFirestore();
 
-  const flashcards = useFirestore(collection(db, `/${uid}`));
+  const flashcards = useFirestore(collection(db, `/${uid}/flashcards/CSE214`));
+  const decks = useFirestore(collection(db, `/${uid}/flashcards/_decks`));
 
   const handleOnClick = () => {
     const tar = document.getElementById("add") as HTMLInputElement;
 
-    setDoc(doc(db, `/${uid}/flashcard`), {
-      name: tar.value,
-    });
+    setDoc(doc(db, `/${uid}/flashcards/_decks`, tar.value), {});
   };
 
   return (
@@ -34,14 +39,16 @@ const Content: Component<ContentProps> = ({ uid }) => {
       />
 
       <Switch>
-        <Match when={flashcards.loading}>
+        <Match when={decks.loading}>
           <p>Loading...</p>
         </Match>
-        <Match when={flashcards.error}>
+        <Match when={decks.error}>
           <p>An error occurred.</p>
         </Match>
-        <Match when={flashcards.data}>
-          <p>{flashcards?.data[0].name}</p>
+        <Match when={decks.data}>
+          {decks.data?.map((d) => {
+            return <Deck deckName={d.id} />;
+          })}
         </Match>
       </Switch>
     </div>
